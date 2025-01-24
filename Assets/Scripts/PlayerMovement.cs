@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         // 確保 Rigidbody 是使用物理運算
         rb.freezeRotation = true; // 防止因碰撞導致角色旋轉
+    
     }
 
     void Update()
@@ -24,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
 
         // 設定移動向量
         movement = new Vector3(moveX, 0f, moveZ).normalized;
+    }
+    void UpdateSpeed()
+    {
+        moveSpeed = PlayerData.Instance.moveSpeed;
     }
 
     void FixedUpdate()

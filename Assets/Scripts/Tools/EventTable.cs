@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class EventTable
+public static class ActionTable
 {
 
 //回傳分數
     public static System.Action<OtherBubbleBehaviour> onDestroyOtherBubble;
-    public static System.Action<GameManager.GameState> onChangeGameState;
-   
+
+    public static Action onPlayerScoreChange;
 }
