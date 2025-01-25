@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +15,10 @@ public class GameManager : Singleton<GameManager>
         Menu,
         Start,
         GameOver
+    }
+    void Start()
+    {
+        SetGameState(GameState.Menu);
     }
     public void SetSceneButton(string stateName)
     {

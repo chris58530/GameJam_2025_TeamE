@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class GameEvent : MonoBehaviour
 {
-    public enum GameState
+    [SerializeField] List<IGameEvent> gameEvents = new List<IGameEvent>();
+
+    IGameEvent nextGameEvent;
+    public void StartGameEvent()
     {
-        DownBrush
+
     }
-   public void StartGameEvent()
-   {
-    
-   }
-   public void EndGameEvent()
-   {
-    
-   }
+    void DoGameEvent()
+    {
+        if (nextGameEvent != null)
+        {
+            nextGameEvent.StartGameEvent();
+        }
+    }
+    public void EndGameEvent()
+    {
+
+    }
 }
