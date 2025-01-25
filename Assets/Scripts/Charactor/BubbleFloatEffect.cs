@@ -12,12 +12,12 @@ public class BubbleFloatEffect : MonoBehaviour
     }
     void RandomFloat()
     {
-        floatStrength = Random.Range(0, 2);
+        floatStrength = Random.Range(0, 1);
     }
     void Update()
     {
 
-        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Sin(Time.time) * floatStrength, transform.localPosition.z);
+        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Sin(Time.time) * floatStrength -1, transform.localPosition.z);
     }
 
     void OnDisable()

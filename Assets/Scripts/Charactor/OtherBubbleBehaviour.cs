@@ -30,7 +30,7 @@ public class OtherBubbleBehaviour : MonoBehaviour
     {
         while (transform.position.y > 0)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 0, transform.position.z), 0.1f);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 0, transform.position.z), 0.25f);
             yield return new WaitForSeconds(0.01f);
         }
     }
