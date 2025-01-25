@@ -21,12 +21,15 @@ public class GameManager : Singleton<GameManager>
     }
     public void SetGameState(GameState state)
     {
+        CameraManager.Instance.SwitchCamera(state);
+
         switch (state)
         {
             case GameState.Menu:
                 sceneLoader.UnloadScene("BaseSettingScene");
                 sceneLoader.UnloadScene("UI");
                 menuUI.SetActive(true);
+                CameraManager.Instance.SwitchCamera(state);
 
                 break;
             case GameState.Start:
@@ -37,7 +40,7 @@ public class GameManager : Singleton<GameManager>
                 gameEvent.StartGameEvent();
                 PlayerData.Instance.Init();
                 break;
-          
+
             case GameState.GameOver:
                 gameEvent.EndGameEvent();
                 break;

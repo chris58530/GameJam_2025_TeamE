@@ -10,11 +10,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        CameraManager.Instance.FindPlayer(gameObject);
+
         // 獲取 Rigidbody 組件
         rb = GetComponent<Rigidbody>();
         // 確保 Rigidbody 是使用物理運算
         rb.freezeRotation = true; // 防止因碰撞導致角色旋轉
-    
+
     }
 
     void Update()
