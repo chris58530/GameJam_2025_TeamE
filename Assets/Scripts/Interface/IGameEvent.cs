@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IGameEvent 
 {
+    void AddGameEvent();
     void StartGameEvent();
     void EndGameEvent();
 }

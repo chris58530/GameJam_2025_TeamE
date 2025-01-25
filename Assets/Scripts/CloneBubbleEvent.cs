@@ -13,6 +13,7 @@ public class CloneBubbleEvent : MonoBehaviour, IGameEvent
     bool canSpawn = false;
     void Start()
     {
+        AddGameEvent();
         canSpawn = false;
     }
 
@@ -21,7 +22,7 @@ public class CloneBubbleEvent : MonoBehaviour, IGameEvent
     {
         if (!canSpawn) return;
 
-        if (Time.time % 3 < Time.deltaTime)
+        if (Time.time % .3f < Time.deltaTime)
         {
             Instantiate(otherBubbleBehaviourPrefab, GetRandomPosition(), Quaternion.identity);
         }
@@ -44,6 +45,12 @@ public class CloneBubbleEvent : MonoBehaviour, IGameEvent
     public void EndGameEvent()
     {
         canSpawn = false;
+    }
+
+    public void AddGameEvent()
+    {
+       GameEvent gameEventComponent = FindObjectOfType<GameEvent>();
+       gameEventComponent.AddGameEvent(this);
     }
 }
 

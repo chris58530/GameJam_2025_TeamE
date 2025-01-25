@@ -12,7 +12,7 @@ public class BubbleFloatEffect : MonoBehaviour
     }
     void RandomFloat()
     {
-        floatStrength = Random.Range(0, 2);
+        floatStrength = Random.Range(0, 1);
     }
     void Update()
     {
