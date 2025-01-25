@@ -7,6 +7,7 @@ public class GameEvent : MonoBehaviour
     [SerializeField] List<IGameEvent> gameEvents = new List<IGameEvent>();
 
     IGameEvent nextGameEvent;
+    IGameEvent currentGameEvent;
     public void StartGameEvent()
     {
         InvokeRepeating("DoGameEvent", 0f, 3f);
@@ -17,6 +18,10 @@ public class GameEvent : MonoBehaviour
     }
     void DoGameEvent()
     {
+        if (currentGameEvent != null)
+        {
+            currentGameEvent.EndGameEvent();
+        }
         if (nextGameEvent != null)
         {
             nextGameEvent.StartGameEvent();
@@ -28,6 +33,9 @@ public class GameEvent : MonoBehaviour
             nextGameEvent.StartGameEvent();
         }
 
+
+        currentGameEvent = nextGameEvent;
+        nextGameEvent = null;
     }
     public void AddGameEvent(IGameEvent gameEvent)
     {

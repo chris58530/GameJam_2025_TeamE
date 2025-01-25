@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // 移動速度
 
     private Rigidbody rb;
     private Vector3 movement;
@@ -28,14 +27,10 @@ public class PlayerMovement : MonoBehaviour
         // 設定移動向量
         movement = new Vector3(moveX, 0f, moveZ).normalized;
     }
-    void UpdateSpeed()
-    {
-        moveSpeed = PlayerData.Instance.moveSpeed;
-    }
-
     void FixedUpdate()
     {
+       
         // 使用 Rigidbody 移動角色
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement *  PlayerData.Instance.moveSpeed * Time.fixedDeltaTime);
     }
 }

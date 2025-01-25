@@ -5,19 +5,24 @@ using UnityEngine;
 public class PlayerData : Singleton<PlayerData>
 {
    public int score;
-   public int moveSpeed;
+   public float moveSpeed;
    public void Init()
    {
        score = 0;
-       moveSpeed = 0;
+       SetMoveSpeed((int)PlayerState.NormalSpeed);
    }
    public void AddScore(int value)
    {
        score += value;
    }
-   public void AddMoveSpeed(int value)
+   public void SetMoveSpeed(float value)
    {
-       moveSpeed += value;
+       moveSpeed = value;
+   }
+   public enum PlayerState
+   {
+      NormalSpeed = 5,
+      TouchedBubbleSpeed = 2
    }
 
 }

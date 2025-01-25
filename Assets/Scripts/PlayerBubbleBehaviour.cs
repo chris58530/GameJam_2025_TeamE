@@ -8,6 +8,8 @@ public class PlayerBubbleBehaviour : MonoBehaviour
     public bool isTouchedOtherBubble = false;
 
     public List<OtherBubbleBehaviour> otherBubbleList = new List<OtherBubbleBehaviour>();
+
+    bool isCarryOtherBubble = false;
     void OnEnable()
     {
         ActionTable.onDestroyOtherBubble += KillBubble;
@@ -23,14 +25,21 @@ public class PlayerBubbleBehaviour : MonoBehaviour
 
     void OnTouchingOtherBubble()
     {
-        if (!Input.GetKeyDown(KeyCode.K)) return;
         if (otherBubbleList.Count == 0) return;
+
+        PlayerData.Instance.SetMoveSpeed((int)PlayerData.PlayerState.TouchedBubbleSpeed);
+
+        if (!Input.GetKeyDown(KeyCode.K)) return;
 
         var bubblesToRemove = new List<OtherBubbleBehaviour>();
         foreach (var otherBubble in otherBubbleList)
         {
             bubblesToRemove.Add(otherBubble);
+
             otherBubble.CollisionPlayer(this, false);
+
+            PlayerData.Instance.SetMoveSpeed((int)PlayerData.PlayerState.NormalSpeed);
+
         }
         foreach (var bubble in bubblesToRemove)
         {
@@ -39,13 +48,19 @@ public class PlayerBubbleBehaviour : MonoBehaviour
     }
     void KillBubble(OtherBubbleBehaviour otherBubble)
     {
-        otherBubbleList.Remove(otherBubble);
+        foreach (var bubble in otherBubbleList)
+        {
+            bubble.CollisionPlayer(this, false);
+        }
+        otherBubbleList.Clear();
+        PlayerData.Instance.SetMoveSpeed((int)PlayerData.PlayerState.NormalSpeed);
+
         PlayerData.Instance.score += 1;
     }
     public void OnCollisionProps()
     {
-       // Destroy(gameObject);
-       Debug.Log("player collision to die");
+        // Destroy(gameObject);
+        Debug.Log("player collision to die");
     }
 
 
@@ -54,12 +69,10 @@ public class PlayerBubbleBehaviour : MonoBehaviour
         if (other.gameObject.TryGetComponent<OtherBubbleBehaviour>(out var otherBubble))
         {
             if (otherBubble.IsTouchedPlayer) return;
-
-            otherBubble.CollisionPlayer(this, true);
-            Debug.Log("isTouched" + other.gameObject.name);
-
             if (otherBubbleList.Contains(otherBubble)) return;
             otherBubbleList.Add(otherBubble);
+            otherBubble.CollisionPlayer(this, true);
+
         }
     }
 
