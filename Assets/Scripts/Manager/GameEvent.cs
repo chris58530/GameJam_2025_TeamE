@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class GameEvent : MonoBehaviour
 {
+    public enum GameState
+    {
+        DownBrush
+    }
    public void StartGameEvent()
    {
+    
    }
 }

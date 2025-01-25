@@ -7,6 +7,8 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] SceneLoader sceneLoader;
     [SerializeField] GameObject menuUI;
+
+    [SerializeField] GameEvent gameEvent;
     public enum GameState
     {
         Menu,
@@ -33,6 +35,7 @@ public class GameManager : Singleton<GameManager>
                 sceneLoader.LoadSceneAdditive("UI");
                 sceneLoader.LoadSceneAdditive("BathScene");
                 menuUI.SetActive(false);
+                gameEvent.StartGameEvent();
                 PlayerData.Instance.Init();
                 break;
             case GameState.Playing:
