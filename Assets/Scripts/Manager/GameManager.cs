@@ -13,7 +13,6 @@ public class GameManager : Singleton<GameManager>
     {
         Menu,
         Start,
-        Playing,
         GameOver
     }
     public void SetSceneButton(string stateName)
@@ -38,9 +37,9 @@ public class GameManager : Singleton<GameManager>
                 gameEvent.StartGameEvent();
                 PlayerData.Instance.Init();
                 break;
-            case GameState.Playing:
-                break;
+          
             case GameState.GameOver:
+                gameEvent.EndGameEvent();
                 break;
         }
     }

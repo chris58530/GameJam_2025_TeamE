@@ -12,4 +12,8 @@ public class GameEvent : MonoBehaviour
    {
     
    }
+   public void EndGameEvent()
+   {
+    
+   }
 }
