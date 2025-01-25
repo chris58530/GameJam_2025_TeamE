@@ -31,6 +31,7 @@ public class GameManager : Singleton<GameManager>
             case GameState.Start:
                 sceneLoader.LoadSceneAdditive("BaseSettingScene");
                 sceneLoader.LoadSceneAdditive("UI");
+                sceneLoader.LoadSceneAdditive("BathScene");
                 menuUI.SetActive(false);
                 PlayerData.Instance.Init();
                 break;
