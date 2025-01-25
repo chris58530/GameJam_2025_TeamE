@@ -17,6 +17,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip Eatclip;
     public AudioClip Pushclip;
     public AudioClip Deadclip;
+    [Header("事件音效")]
+    public AudioClip ObjectFallclip;
+    public AudioClip Fallingclip;
+    public AudioClip BubbleFallclip;
 
     AudioSource startMusicSource;
     AudioSource introMusicSource;
@@ -37,6 +41,8 @@ public class AudioManager : MonoBehaviour
 
         
     }
+    
+    // Music
     public static void PlayStartMusicAudio()
     {
         current.startMusicSource.clip = current. StartMusic;
@@ -49,7 +55,7 @@ public class AudioManager : MonoBehaviour
         current.bgmSource.loop = true;
         current.bgmSource.Play();
     }
-    public static void StopAudio()
+    public static void StopstartMusicAudio()
     {
         current.startMusicSource.Stop();
     }
@@ -57,6 +63,8 @@ public class AudioManager : MonoBehaviour
     {
         current.bgmSource.Stop();
     }
+    
+    // Bubble movement
     public static void PlayfootstepAudio()
     {
         int index = Random.Range(0, current.WalkStepclips.Length);
@@ -77,6 +85,26 @@ public class AudioManager : MonoBehaviour
         current.playerSource.clip = current. Deadclip;
         current.playerSource.Play();
     }
+    
+    //事件音效
+      public static void PlayobjectfallAudio()
+    {
+        current.esSource.clip = current. ObjectFallclip;
+        current.esSource.Play();
+    }
+      public static void PlaybubblefallAudio()
+    {
+        current.esSource.clip = current. BubbleFallclip;
+        current.esSource.Play();
+    }
+      public static void PlayfallingAudio()
+    {
+        current.esSource.clip = current. Fallingclip;
+        current.esSource.Play();
+    }
+    
+    
+    
     void Start()
     {
         
