@@ -42,6 +42,11 @@ public class PlayerBubbleBehaviour : MonoBehaviour
         otherBubbleList.Remove(otherBubble);
         PlayerData.Instance.score += 1;
     }
+    public void OnCollisionProps()
+    {
+       // Destroy(gameObject);
+       Debug.Log("player collision to die");
+    }
 
 
     private void OnCollisionEnter(Collision other)

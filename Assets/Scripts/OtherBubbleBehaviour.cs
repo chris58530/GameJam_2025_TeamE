@@ -37,6 +37,21 @@ public class OtherBubbleBehaviour : MonoBehaviour
             StartCoroutine(RemoveRigidbody(1));
         }
     }
+    public void OnCollisionProps()
+    {
+        Destroy(gameObject);
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent<OtherBubbleBehaviour>(out var bubble))
+        {
+            bubble.OnCollisionProps();
+        }
+        if (other.gameObject.TryGetComponent<PlayerBubbleBehaviour>(out var player))
+        {
+            player.OnCollisionProps();
+        }
+    }
 
     private void Update()
     {
