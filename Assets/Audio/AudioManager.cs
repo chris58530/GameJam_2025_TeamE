@@ -42,7 +42,7 @@ public class AudioManager : MonoBehaviour
         
     }
     
-    // Music
+    // Music聲音觸發
     public static void PlayStartMusicAudio()
     {
         current.startMusicSource.clip = current. StartMusic;
@@ -64,7 +64,7 @@ public class AudioManager : MonoBehaviour
         current.bgmSource.Stop();
     }
     
-    // Bubble movement
+    // Bubble movement聲音觸發
     public static void PlayfootstepAudio()
     {
         int index = Random.Range(0, current.WalkStepclips.Length);
@@ -86,7 +86,7 @@ public class AudioManager : MonoBehaviour
         current.playerSource.Play();
     }
     
-    //事件音效
+    //事件音效觸發
       public static void PlayobjectfallAudio()
     {
         current.esSource.clip = current. ObjectFallclip;
