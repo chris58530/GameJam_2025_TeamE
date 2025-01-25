@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameEvent : MonoBehaviour
 {
     [SerializeField] List<IGameEvent> gameEvents = new List<IGameEvent>();
-
     IGameEvent nextGameEvent;
     IGameEvent currentGameEvent;
     public void StartGameEvent()

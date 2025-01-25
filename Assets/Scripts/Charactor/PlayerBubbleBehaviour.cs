@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerBubbleBehaviour : MonoBehaviour,ISinkable
+public class PlayerBubbleBehaviour : MonoBehaviour
 {
     public bool isTouchedOtherBubble = false;
 
@@ -45,6 +45,9 @@ public class PlayerBubbleBehaviour : MonoBehaviour,ISinkable
         {
             otherBubbleList.Remove(bubble);
         }
+
+        AudioManager.current.PlayPushAudio();
+
     }
     void KillBubble(OtherBubbleBehaviour otherBubble)
     {
@@ -55,14 +58,15 @@ public class PlayerBubbleBehaviour : MonoBehaviour,ISinkable
         otherBubbleList.Clear();
         PlayerData.Instance.SetMoveSpeed((int)PlayerData.PlayerState.NormalSpeed);
 
-        PlayerData.Instance.score += 1;
-
+        PlayerData.Instance.AddScore(1);
         this.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
     }
-    public void OnCollisionProps()
+    public void OnCollisionWeapon()
     {
-        // Destroy(gameObject);
-        Debug.Log("player collision to die");
+        
+        PlayerData.Instance.AddScore(-1);
+        this.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
+
     }
 
 

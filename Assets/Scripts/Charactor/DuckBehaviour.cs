@@ -9,7 +9,6 @@ public enum DuckAttackState
     HyperBeam,
     SinkAttack,
 
-    Dead
 }
 
 public class DuckBehaviour : MonoBehaviour
@@ -22,16 +21,34 @@ public class DuckBehaviour : MonoBehaviour
 
     DuckAttackState currentState = DuckAttackState.Idle;
 
-    [SerializeField] private Transform player;
+   public Transform player;
     bool attacking = false;
+    void Start(){
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        AudioManager.current.PlayBattleBGM();
+    }
 
 
     // Update is called once er frame
     void Update()
     {
-        if(attacking)return;
+          if (transform.position.y > 0)
+        {
+            StartCoroutine(MoveToZero());
+        }
+        if (attacking) return;
         AttackState(currentState);
+
     }
+     private IEnumerator MoveToZero()
+    {
+        while (transform.position.y > 1)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 0, transform.position.z), 0.25f);
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
 
     public void SwithState(DuckAttackState state)
     {
@@ -39,10 +56,8 @@ public class DuckBehaviour : MonoBehaviour
     }
     public void AttackState(DuckAttackState state)
     {
-        if(player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-        }
+        if (player == null) return;
+
         switch (state)
         {
             case DuckAttackState.Idle:
@@ -57,19 +72,23 @@ public class DuckBehaviour : MonoBehaviour
                 StartCoroutine(HyperBeam());
                 Debug.Log("HyperBeam");
                 break;
-            // case DuckAttackState.SinkAttack:
-            //     Debug.Log("SinkAttack");
-            //     StartCoroutine(SinkAttack());
-            //     break;
+                case DuckAttackState.SinkAttack:
+                    Debug.Log("SinkAttack");
+                StartCoroutine(HyperBeam());
+                    // StartCoroutine(SinkAttack());
+                    break;
         }
     }
     IEnumerator Idle()
     {
         attacking = true;
+        yield return new WaitForSeconds(.5f);
+        
         int random = Random.Range(0, DuckAttackState.GetValues(typeof(DuckAttackState)).Length);
+        Debug.Log(random);
         SwithState((DuckAttackState)random);
-        yield return new WaitForSeconds(1);
         attacking = false;
+        yield return null;
     }
     IEnumerator Rush()
     {
@@ -80,6 +99,7 @@ public class DuckBehaviour : MonoBehaviour
         {
             // Assuming you have a reference to the player
             Vector3 direction = (player.position - transform.position).normalized;
+            direction.y = 0;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, elapsedTime / 3f);
             elapsedTime += Time.deltaTime;
@@ -100,9 +120,9 @@ public class DuckBehaviour : MonoBehaviour
             yield return null;
         }
         SwithState(DuckAttackState.Idle);
+        attacking = false;
 
         yield return null;
-        attacking = false;
     }
 
     IEnumerator HyperBeam()
@@ -116,6 +136,8 @@ public class DuckBehaviour : MonoBehaviour
             // Assuming you have a reference to the player
             Vector3 direction = (player.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
+            direction.y = 0;
+
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, elapsedTime / 3f);
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -123,6 +145,7 @@ public class DuckBehaviour : MonoBehaviour
 
         // Deactivate preHyperBeam
         preHyperBeam.SetActive(false);
+        yield return new WaitForSeconds(1);
 
         // Activate hyperBeam immediately
         hyperBeam.SetActive(true);
@@ -135,9 +158,9 @@ public class DuckBehaviour : MonoBehaviour
 
         // Switch back to Idle state
         SwithState(DuckAttackState.Idle);
+        attacking = false;
 
         yield return null;
-        attacking = false;
 
     }
 
@@ -166,8 +189,8 @@ public class DuckBehaviour : MonoBehaviour
         // Switch back to Idle state
         SwithState(DuckAttackState.Idle);
 
-        yield return null;
         attacking = false;
+        yield return null;
     }
 
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class OtherBubbleBehaviour : MonoBehaviour,ISinkable
+public class OtherBubbleBehaviour : MonoBehaviour, ISinkable
 {
     public float touchToDestroyTime = 2f;
     private float currentTouchTime = 0;
@@ -19,8 +19,8 @@ public class OtherBubbleBehaviour : MonoBehaviour,ISinkable
     {
         float randomScale = UnityEngine.Random.Range(0.5f, 1.5f);
         transform.localScale = new Vector3(randomScale, randomScale, randomScale);
-        
-        if (transform.position.y > 0)
+
+        if (transform.position.y > 1)
         {
             StartCoroutine(MoveToZero());
         }
@@ -33,6 +33,9 @@ public class OtherBubbleBehaviour : MonoBehaviour,ISinkable
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 0, transform.position.z), 0.25f);
             yield return new WaitForSeconds(0.01f);
         }
+        AudioManager.current.PlaybubblefallAudio();
+        Debug.Log("PlaybubblefallAudio");
+        yield return null;
     }
 
     public void CollisionPlayer(PlayerBubbleBehaviour player, bool isTouched)

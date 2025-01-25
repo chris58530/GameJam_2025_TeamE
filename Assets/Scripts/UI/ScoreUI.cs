@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class ScoreUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] private TMP_Text scoreText;
+    void OnEnable()
     {
-        
+        EventTable.onPlayerScoreChange += UpdateScore;
+    }
+    void OnDisable()
+    {
+        EventTable.onPlayerScoreChange -= UpdateScore;
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdateScore(int score)
     {
-        
+
+        scoreText.text = score.ToString();
     }
 }

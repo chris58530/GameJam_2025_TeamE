@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CloneBubbleEvent : MonoBehaviour, IGameEvent
 {
@@ -32,7 +33,8 @@ public class CloneBubbleEvent : MonoBehaviour, IGameEvent
     }
     void CloneBubble()
     {
-        Instantiate(otherBubbleBehaviourPrefab, GetRandomPosition() + Vector3.up * 10, Quaternion.identity);
+
+        Instantiate(otherBubbleBehaviourPrefab, GetRandomPosition() + Vector3.up * 10, Quaternion.Euler(-90, 0, 0));
     }
     Vector3 GetRandomPosition()
     {

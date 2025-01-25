@@ -4,27 +4,27 @@ using UnityEngine.Events;
 
 public class Brush: MonoBehaviour
 {
-    public GameObject prefab; // ­n¥Í¦¨ªºª«¥ó
-    public float spawnInterval = 1f; // ¨C¦¸¥Í¦¨ªº¶¡¹j®É¶¡
-    public List<Transform> spawnPoints; // ¥Í¦¨ÂI²M³æ
-    public int maxObjects = 10; // ³õ¤W³Ì¤jª«¥ó¼Æ¶q
-    public UnityEvent onSpawningComplete; // ¥Í¦¨µ²§ôªº¨Æ¥ó
+    public GameObject prefab; // ï¿½nï¿½Í¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float spawnInterval = 1f; // ï¿½Cï¿½ï¿½ï¿½Í¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½jï¿½É¶ï¿½
+    public List<Transform> spawnPoints; // ï¿½Í¦ï¿½ï¿½Iï¿½Mï¿½ï¿½
+    public int maxObjects = 10; // ï¿½ï¿½ï¿½Wï¿½Ì¤jï¿½ï¿½ï¿½ï¿½Æ¶q
+    public UnityEvent onSpawningComplete; // ï¿½Í¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¥ï¿½
 
     private float timer;
-    private float totalSpawnTime = 10f; // Á`¥Í¦¨®É¶¡
-    private float elapsedTime = 0f; // ¸g¹Lªº®É¶¡
+    private float totalSpawnTime = 10f; // ï¿½`ï¿½Í¦ï¿½ï¿½É¶ï¿½
+    private float elapsedTime = 0f; // ï¿½gï¿½Lï¿½ï¿½ï¿½É¶ï¿½
     private List<GameObject> activeObjects = new List<GameObject>();
 
     void Update()
     {
-        // ¦pªG¥Í¦¨®É¶¡¤w¸gµ²§ô¡A°±¤î¥Í¦¨
+        // ï¿½pï¿½Gï¿½Í¦ï¿½ï¿½É¶ï¿½ï¿½wï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½Í¦ï¿½
         if (elapsedTime >= totalSpawnTime)
         {
 
             return;
         }
 
-        // ­p®É¾¹±±¨î¥Í¦¨
+        // ï¿½pï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Í¦ï¿½
         timer += Time.deltaTime;
         elapsedTime += Time.deltaTime;
 
@@ -34,10 +34,10 @@ public class Brush: MonoBehaviour
             timer = 0f;
         }
 
-        // ÀË¬d¬O§_¶W¹LÁ`¥Í¦¨®É¶¡
+        // ï¿½Ë¬dï¿½Oï¿½_ï¿½Wï¿½Lï¿½`ï¿½Í¦ï¿½ï¿½É¶ï¿½
         if (elapsedTime >= totalSpawnTime)
         {
-            onSpawningComplete.Invoke(); // Ä²µo¥Í¦¨µ²§ô¨Æ¥ó
+            onSpawningComplete.Invoke(); // Ä²ï¿½oï¿½Í¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¥ï¿½
         }
     }
 
@@ -50,18 +50,18 @@ public class Brush: MonoBehaviour
                 DestroyOldestObject();
             }
 
-            // ¦b¥Í¦¨ÂI¦ì¸m¥Í¦¨ª«¥ó
+            // ï¿½bï¿½Í¦ï¿½ï¿½Iï¿½ï¿½mï¿½Í¦ï¿½ï¿½ï¿½ï¿½ï¿½
             GameObject spawnedObject = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
             activeObjects.Add(spawnedObject);
 
-            // ²K¥[­èÅé¨Ã±Ò¥Î­«¤O
+            // ï¿½Kï¿½[ï¿½ï¿½ï¿½ï¿½Ã±Ò¥Î­ï¿½ï¿½O
             Rigidbody rb = spawnedObject.GetComponent<Rigidbody>();
             if (rb == null)
             {
                 rb = spawnedObject.AddComponent<Rigidbody>();
             }
-            rb.useGravity = true; // ±Ò¥Î­«¤O
-            rb.constraints = RigidbodyConstraints.None; // ½T«O¤£Âê©w¦ì¸m©Î±ÛÂà
+            rb.useGravity = true; // ï¿½Ò¥Î­ï¿½ï¿½O
+            rb.constraints = RigidbodyConstraints.None; // ï¿½Tï¿½Oï¿½ï¿½ï¿½ï¿½wï¿½ï¿½mï¿½Î±ï¿½ï¿½ï¿½
         }
     }
 
@@ -90,7 +90,7 @@ public class Brush: MonoBehaviour
         }
         if (other.gameObject.TryGetComponent<PlayerBubbleBehaviour>(out var player))
         {
-            player.OnCollisionProps();
+            // player.OnCollisionProps();
         }
     }
     //void OnTriggerEnter(Collider other)

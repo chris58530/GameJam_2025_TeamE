@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject menuUI;
 
     [SerializeField] GameEvent gameEvent;
+
     public enum GameState
     {
         Menu,
@@ -19,6 +20,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         SetGameState(GameState.Menu);
+        AudioManager.current.PlayStartMusicAudio();
     }
     public void SetSceneButton(string stateName)
     {
@@ -38,6 +40,9 @@ public class GameManager : Singleton<GameManager>
 
                 break;
             case GameState.Start:
+                AudioManager.current.StopstartMusicAudio();
+                AudioManager.current.PlaybgmAudio();
+
                 sceneLoader.LoadSceneAdditive("BaseSettingScene");
                 sceneLoader.LoadSceneAdditive("UI");
                 sceneLoader.LoadSceneAdditive("BathScene");

@@ -9,11 +9,14 @@ public class PlayerData : Singleton<PlayerData>
    public void Init()
    {
        score = 0;
+       EventTable.onPlayerScoreChange?.Invoke(score);
+
        SetMoveSpeed((int)PlayerState.NormalSpeed);
    }
    public void AddScore(int value)
    {
        score += value;
+       EventTable.onPlayerScoreChange?.Invoke(score);
    }
    public void SetMoveSpeed(float value)
    {

@@ -1,18 +1,20 @@
+using System.Data.Common;
 using UnityEngine;
 using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    static AudioManager current;
+    public static AudioManager current;
 
     [Header("開頭音樂")]
     public AudioClip StartMusic;
+    [Header("Battle音樂")]
+    public AudioClip BattleMusic;
     [Header("Intro")]
     public AudioClip IntroMusic;
     [Header("BGM")]
     public AudioClip bgm;
-    public AudioClip fightbgm;
     [Header("Bubble Movement")]
     public AudioClip[] WalkStepclips;
     public AudioClip Eatclip;
@@ -23,8 +25,6 @@ public class AudioManager : MonoBehaviour
     public AudioClip Fallingclip;
     public AudioClip BubbleFallclip;
 
-    AudioSource startMusicSource;
-    AudioSource introMusicSource;
     AudioSource bgmSource;
     AudioSource esSource;
     AudioSource playerSource;
@@ -34,92 +34,85 @@ public class AudioManager : MonoBehaviour
         current = this;
         DontDestroyOnLoad(gameObject);
 
-        startMusicSource = gameObject.AddComponent<AudioSource>();
-        introMusicSource = gameObject.AddComponent<AudioSource>();
+
         bgmSource = gameObject.AddComponent<AudioSource>();
         esSource = gameObject.AddComponent<AudioSource>();
         playerSource = gameObject.AddComponent<AudioSource>();
 
-        
+
     }
-    
+
     // Music聲音觸發
-    public static void PlayStartMusicAudio()
+    public void PlayStartMusicAudio()
     {
-        current.startMusicSource.clip = current. StartMusic;
-        current.startMusicSource.loop = true;
-        current.startMusicSource.Play();
-    }
-    public static void PlaybgmAudio()
-    {
-        current.bgmSource.clip = current. bgm;
+        current.bgmSource.clip = current.StartMusic;
         current.bgmSource.loop = true;
         current.bgmSource.Play();
     }
-     public static void PlayfightbgmAudio()
+    public void PlaybgmAudio()
     {
-        current.bgmSource.clip = current. fightbgm;
+        current.bgmSource.clip = current.bgm;
         current.bgmSource.loop = true;
         current.bgmSource.Play();
     }
-    public static void StopstartMusicAudio()
+     public void PlayBattleBGM()
     {
-        current.startMusicSource.Stop();
+        current.bgmSource.clip = current.BattleMusic;
+        current.bgmSource.loop = true;
+        current.bgmSource.Play();
     }
-    public static void Stopbgm()
+    public void StopstartMusicAudio()
     {
         current.bgmSource.Stop();
     }
-    
-    // Bubble movement聲音觸發
-    public static void PlayfootstepAudio()
+    public void Stopbgm()
     {
-        int index = Random.Range(0, current.WalkStepclips.Length);
-        current.playerSource.clip = current. WalkStepclips[index];
-    }
-     public static void PlayEatAudio()
-    {
-        current.playerSource.clip = current. Eatclip;
-        current.playerSource.Play();
-    }
-     public static void PlayPushAudio()
-    {
-        current.playerSource.clip = current. Pushclip;
-        current.playerSource.Play();
-    }
-      public static void PlayDeadAudio()
-    {
-        current.playerSource.clip = current. Deadclip;
-        current.playerSource.Play();
-    }
-    
-    //事件音效觸發
-      public static void PlayobjectfallAudio()
-    {
-        current.esSource.clip = current. ObjectFallclip;
-        current.esSource.Play();
-    }
-      public static void PlaybubblefallAudio()
-    {
-        current.esSource.clip = current. BubbleFallclip;
-        current.esSource.Play();
-    }
-      public static void PlayfallingAudio()
-    {
-        current.esSource.clip = current. Fallingclip;
-        current.esSource.Play();
-    }
-    
-    
-    
-    void Start()
-    {
-        
+        current.bgmSource.Stop();
     }
 
-    // Update is called once per frame
-    void Update()
+    // Bubble movement聲音觸發
+    public void PlayfootstepAudio()
     {
-        
+        if (current.playerSource.isPlaying)
+        {
+            return;
+        }
+        int index = Random.Range(0, current.WalkStepclips.Length);
+        current.playerSource.clip = current.WalkStepclips[index];
+        playerSource.Play();
     }
+    public void PlayEatAudio()
+    {
+        current.playerSource.clip = current.Eatclip;
+        current.playerSource.Play();
+    }
+    public void PlayPushAudio()
+    {
+        current.playerSource.clip = current.Pushclip;
+        current.playerSource.Play();
+    }
+    public void PlayDeadAudio()
+    {
+        current.playerSource.clip = current.Deadclip;
+        current.playerSource.Play();
+    }
+
+    //事件音效觸發
+    public void PlayobjectfallAudio()
+    {
+        current.esSource.clip = current.ObjectFallclip;
+        current.esSource.Play();
+    }
+    public void PlaybubblefallAudio()
+    {
+        current.esSource.clip = current.BubbleFallclip;
+        current.esSource.Play();
+    }
+    public void PlayfallingAudio()
+    {
+        current.esSource.clip = current.Fallingclip;
+        current.esSource.PlayOneShot(BubbleFallclip);
+    }
+
+
 }
