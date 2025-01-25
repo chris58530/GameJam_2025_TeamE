@@ -17,6 +17,9 @@ public class OtherBubbleBehaviour : MonoBehaviour
     }
     void Start()
     {
+        float randomScale = UnityEngine.Random.Range(0.5f, 1.5f);
+        transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+        
         if (transform.position.y > 0)
         {
             StartCoroutine(MoveToZero());

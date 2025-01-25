@@ -56,6 +56,8 @@ public class PlayerBubbleBehaviour : MonoBehaviour
         PlayerData.Instance.SetMoveSpeed((int)PlayerData.PlayerState.NormalSpeed);
 
         PlayerData.Instance.score += 1;
+
+        this.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
     }
     public void OnCollisionProps()
     {
