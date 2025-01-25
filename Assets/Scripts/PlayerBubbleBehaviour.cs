@@ -30,7 +30,7 @@ public class PlayerBubbleBehaviour : MonoBehaviour
         foreach (var otherBubble in otherBubbleList)
         {
             bubblesToRemove.Add(otherBubble);
-            otherBubble.CollectionPlayer(this, false);
+            otherBubble.CollisionPlayer(this, false);
         }
         foreach (var bubble in bubblesToRemove)
         {
@@ -55,7 +55,7 @@ public class PlayerBubbleBehaviour : MonoBehaviour
         {
             if (otherBubble.IsTouchedPlayer) return;
 
-            otherBubble.CollectionPlayer(this, true);
+            otherBubble.CollisionPlayer(this, true);
             Debug.Log("isTouched" + other.gameObject.name);
 
             if (otherBubbleList.Contains(otherBubble)) return;

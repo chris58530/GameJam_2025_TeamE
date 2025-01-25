@@ -15,7 +15,24 @@ public class OtherBubbleBehaviour : MonoBehaviour
         get { return isTouchedPlayer; }
         set { isTouchedPlayer = value; }
     }
-    public void CollectionPlayer(PlayerBubbleBehaviour player, bool isTouched)
+    void Start()
+    {
+        if (transform.position.y > 0)
+        {
+            StartCoroutine(MoveToZero());
+        }
+    }
+
+    private IEnumerator MoveToZero()
+    {
+        while (transform.position.y > 0)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 0, transform.position.z), 0.1f);
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    public void CollisionPlayer(PlayerBubbleBehaviour player, bool isTouched)
     {
         currentTouchTime = touchToDestroyTime;
         if (isTouched)
@@ -41,17 +58,7 @@ public class OtherBubbleBehaviour : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.TryGetComponent<OtherBubbleBehaviour>(out var bubble))
-        {
-            bubble.OnCollisionProps();
-        }
-        if (other.gameObject.TryGetComponent<PlayerBubbleBehaviour>(out var player))
-        {
-            player.OnCollisionProps();
-        }
-    }
+
 
     private void Update()
     {

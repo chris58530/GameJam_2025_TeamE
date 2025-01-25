@@ -22,10 +22,17 @@ public class CloneBubbleEvent : MonoBehaviour, IGameEvent
     {
         if (!canSpawn) return;
 
-        if (Time.time % .3f < Time.deltaTime)
+        if (Time.time % 3f < Time.deltaTime)
         {
-            Instantiate(otherBubbleBehaviourPrefab, GetRandomPosition(), Quaternion.identity);
+            for (int i = 0; i < 10; i++)
+            {
+                Invoke("CloneBubble", i * 0.1f);
+            }
         }
+    }
+    void CloneBubble()
+    {
+        Instantiate(otherBubbleBehaviourPrefab, GetRandomPosition() + Vector3.up * 10, Quaternion.identity);
     }
     Vector3 GetRandomPosition()
     {
