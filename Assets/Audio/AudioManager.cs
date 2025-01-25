@@ -61,7 +61,6 @@ public class AudioManager : MonoBehaviour
     {
         int index = Random.Range(0, current.WalkStepclips.Length);
         current.playerSource.clip = current. WalkStepclips[index];
-        current.EFXSoundSource.Play();
     }
      public static void PlayEatAudio()
     {
