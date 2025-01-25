@@ -3,7 +3,7 @@ using UnityEngine;
 public class ObjectBehavior : MonoBehaviour
 {
     private Brush spawner;
-
+    private bool Isend;
     public void SetSpawner(Brush spawner)
     {
         this.spawner = spawner;
