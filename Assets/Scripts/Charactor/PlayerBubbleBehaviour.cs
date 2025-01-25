@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerBubbleBehaviour : MonoBehaviour
+public class PlayerBubbleBehaviour : MonoBehaviour,ISinkable
 {
     public bool isTouchedOtherBubble = false;
 
@@ -12,11 +12,11 @@ public class PlayerBubbleBehaviour : MonoBehaviour
     bool isCarryOtherBubble = false;
     void OnEnable()
     {
-        ActionTable.onDestroyOtherBubble += KillBubble;
+        EventTable.onDestroyOtherBubble += KillBubble;
     }
     void OnDisable()
     {
-        ActionTable.onDestroyOtherBubble -= KillBubble;
+        EventTable.onDestroyOtherBubble -= KillBubble;
     }
     void Update()
     {

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7352872669971908483}
   - component: {fileID: 7380037184164922165}
   - component: {fileID: 8385528943659812274}
-  - component: {fileID: 7748497061613264361}
   m_Layer: 0
   m_Name: BubbleModel
   m_TagString: Untagged
@@ -84,18 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7748497061613264361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104262555101181681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05774ad41d81e47e295ca1ebc56bc2d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5194146160845696991
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +100,7 @@ GameObject:
   - component: {fileID: 8473028607028988133}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

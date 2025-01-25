@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class OtherBubbleBehaviour : MonoBehaviour
+public class OtherBubbleBehaviour : MonoBehaviour,ISinkable
 {
     public float touchToDestroyTime = 2f;
     private float currentTouchTime = 0;
@@ -71,7 +71,7 @@ public class OtherBubbleBehaviour : MonoBehaviour
             if (currentTouchTime <= 0)
             {
                 Destroy(this.gameObject);
-                ActionTable.onDestroyOtherBubble?.Invoke(this);
+                EventTable.onDestroyOtherBubble?.Invoke(this);
             }
         }
     }

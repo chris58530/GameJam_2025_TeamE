@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ActionTable
+public static class EventTable
 {
 
 //回傳分數
