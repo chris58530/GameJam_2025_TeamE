@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip IntroMusic;
     [Header("BGM")]
     public AudioClip bgm;
+    public AudioClip fightbgm;
     [Header("Bubble Movement")]
     public AudioClip[] WalkStepclips;
     public AudioClip Eatclip;
@@ -52,6 +53,12 @@ public class AudioManager : MonoBehaviour
     public static void PlaybgmAudio()
     {
         current.bgmSource.clip = current. bgm;
+        current.bgmSource.loop = true;
+        current.bgmSource.Play();
+    }
+     public static void PlayfightbgmAudio()
+    {
+        current.bgmSource.clip = current. fightbgm;
         current.bgmSource.loop = true;
         current.bgmSource.Play();
     }
