@@ -10,7 +10,7 @@ public class GameEvent : MonoBehaviour
     IGameEvent currentGameEvent;
     public void StartGameEvent()
     {
-        InvokeRepeating("DoGameEvent", 0f, 3f);
+        InvokeRepeating("DoGameEvent", 0f, 10f);
     }
     public void SetGameState(IGameEvent gameEvent)
     {
@@ -28,7 +28,6 @@ public class GameEvent : MonoBehaviour
         }
         else
         {
-            Debug.Log("no assign game event");
             SetGameState(gameEvents[Random.Range(0, gameEvents.Count)]);
             nextGameEvent.StartGameEvent();
         }
