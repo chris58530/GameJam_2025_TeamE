@@ -66,7 +66,7 @@ public class PlayerBubbleBehaviour : MonoBehaviour
         
         PlayerData.Instance.AddScore(-1);
         this.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
-
+        CameraManager.Instance.ShakeCamera();
     }
 
 

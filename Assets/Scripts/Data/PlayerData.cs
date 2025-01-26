@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerData : Singleton<PlayerData>
 {
@@ -15,7 +17,12 @@ public class PlayerData : Singleton<PlayerData>
    }
    public void AddScore(int value)
    {
+
        score += value;
+       if (score < 0)
+       {
+           SceneManager.LoadScene("Intro");
+       }
        EventTable.onPlayerScoreChange?.Invoke(score);
    }
    public void SetMoveSpeed(float value)
