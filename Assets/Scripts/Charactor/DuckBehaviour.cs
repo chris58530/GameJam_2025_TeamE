@@ -7,7 +7,8 @@ public enum DuckAttackState
     Idle,
     Rush,
     HyperBeam,
-    SinkAttack, GoMiddle,
+    SinkAttack, 
+    GoMiddle,
 
 }
 
@@ -79,17 +80,16 @@ public class DuckBehaviour : MonoBehaviour
                 // StartCoroutine(SinkAttack());
                 break;
             case DuckAttackState.GoMiddle:
-                StartCoroutine(GoMiddle());
+               GoMiddle();
                 break;
         }
     }
-    IEnumerator GoMiddle()
+    void GoMiddle()
     {
-        while (transform.position.z > 0 || transform.position.x > 0)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 1, 0), 0.25f);
-            yield return new WaitForSeconds(0.01f);
-        }
+        transform.position = Vector3.zero;
+        SwithState(DuckAttackState.HyperBeam);
+        
+
     }
     IEnumerator Idle()
     {
@@ -143,7 +143,7 @@ public class DuckBehaviour : MonoBehaviour
         // Activate preHyperBeam and face the player for 3 seconds
         preHyperBeam.SetActive(true);
         float elapsedTime = 0f;
-        while (elapsedTime < 3f)
+        while (elapsedTime < 1f)
         {
             // Assuming you have a reference to the player
             Vector3 direction = (player.position - transform.position).normalized;
@@ -157,7 +157,7 @@ public class DuckBehaviour : MonoBehaviour
 
         // Deactivate preHyperBeam
         preHyperBeam.SetActive(false);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.5f);
 
         // Activate hyperBeam immediately
         hyperBeam.SetActive(true);
