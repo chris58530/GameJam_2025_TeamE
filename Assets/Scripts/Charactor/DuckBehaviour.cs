@@ -34,6 +34,10 @@ public class DuckBehaviour : MonoBehaviour
     // Update is called once er frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+           GetHurt();
+        }
         if (transform.position.y > 0)
         {
             StartCoroutine(MoveToZero());
@@ -210,11 +214,31 @@ public class DuckBehaviour : MonoBehaviour
     {
         DuckData.Instance.SetHp(10);
         StartCoroutine(FlashRed());
+        if(DuckData.Instance.hp <= 0)
+        {
+            StopAllCoroutines();
+            StartCoroutine(ReLife());
+            
+        }
     }
     IEnumerator FlashRed()
     {
         duckModel.GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(0.2f);
         duckModel.GetComponent<Renderer>().material.color = Color.white;
+    }
+    IEnumerator ReLife()
+    {
+        attacking = true;
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.Euler(90, 0, 0);
+        duckModel.GetComponent<Renderer>().material.color = Color.black;
+        DuckData.Instance.ReSetHp();
+        yield return new WaitForSeconds(6);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        SwithState(DuckAttackState.Idle);
+        duckModel.GetComponent<Renderer>().material.color = Color.white;
+        attacking = false;
+
     }
 }

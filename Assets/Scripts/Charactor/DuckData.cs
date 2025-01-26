@@ -10,4 +10,19 @@ public class DuckData : Singleton<DuckData>
         this.hp -= hp;
         EventTable.onDuckHealthChange?.Invoke(this.hp);
     }
+    public void ReSetHp()
+    {
+        StartCoroutine(ResetHp());
+    }
+    IEnumerator ResetHp()
+    {
+           yield return new WaitForSeconds(2f);
+
+       while(hp<100)
+       {
+           hp++;
+           EventTable.onDuckHealthChange?.Invoke(this.hp);
+           yield return new WaitForSeconds(0.04f);
+       }
+    }
 }
