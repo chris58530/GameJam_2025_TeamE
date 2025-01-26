@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class DuckWeapon : MonoBehaviour
 {
+
     void OnTriggerEnter(Collider other)
     {
-        if (TryGetComponent<PlayerBubbleBehaviour>(out var player))
+        if (other.TryGetComponent<PlayerBubbleBehaviour>(out var player))
         {
             player.OnCollisionWeapon();
+            Debug.Log("Player hit the weapon");
         }
-
-
     }
 }

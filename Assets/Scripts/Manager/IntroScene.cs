@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class IntroScene : MonoBehaviour
 {
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(gameSceneName);
         }
@@ -22,5 +23,9 @@ public class IntroScene : MonoBehaviour
     void OnVideoFinished(UnityEngine.Video.VideoPlayer vp)
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(gameSceneName);
+    }
+    void OnDisable()
+    {
+        videoPlayer.loopPointReached -= OnVideoFinished;
     }
 }
