@@ -13,12 +13,17 @@ public class ScoreUI : MonoBehaviour
     void OnEnable()
     {
         EventTable.onPlayerScoreChange += UpdateScore;
+        EventTable.onDuckHealthChange += UpdateDuckHealth;
     }
     void OnDisable()
     {
         EventTable.onPlayerScoreChange -= UpdateScore;
+        EventTable.onDuckHealthChange -= UpdateDuckHealth;
     }
-
+    void UpdateDuckHealth(int health)
+    {
+        duckHealthImage.fillAmount = health / 100f;
+    }
     void UpdateScore(int score)
     {
 

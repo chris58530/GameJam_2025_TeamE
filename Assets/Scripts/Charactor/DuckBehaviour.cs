@@ -193,5 +193,8 @@ public class DuckBehaviour : MonoBehaviour
         yield return null;
     }
 
-
+    public void GetHurt()
+    {
+       DuckData.Instance.SetHp(10);
+    }
 }

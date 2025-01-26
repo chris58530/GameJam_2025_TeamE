@@ -25,7 +25,7 @@ public class CloneBubbleEvent : MonoBehaviour, IGameEvent
 
         if (Time.time % 3f < Time.deltaTime)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
                 Invoke("CloneBubble", i * 0.1f);
             }

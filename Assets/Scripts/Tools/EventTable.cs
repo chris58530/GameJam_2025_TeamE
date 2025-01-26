@@ -10,4 +10,5 @@ public static class EventTable
     public static System.Action<OtherBubbleBehaviour> onDestroyOtherBubble;
 
     public static Action<int> onPlayerScoreChange;
+    public static Action<int> onDuckHealthChange;
 }

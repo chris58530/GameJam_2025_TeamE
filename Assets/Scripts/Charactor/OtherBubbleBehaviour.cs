@@ -52,8 +52,9 @@ public class OtherBubbleBehaviour : MonoBehaviour, ISinkable
         {
             this.transform.parent = null;
             Rigidbody rigidbody = this.AddComponent<Rigidbody>();
+            this.AddComponent<PlayerWeapon>();
             Vector3 direction = (this.transform.position - player.transform.position).normalized;
-            rigidbody.AddForce(direction * 5, ForceMode.Impulse);
+            rigidbody.AddForce(direction * 10, ForceMode.Impulse);
             rigidbody.freezeRotation = true;
             rigidbody.constraints = RigidbodyConstraints.FreezePositionY;
             rigidbody.useGravity = false;
@@ -84,6 +85,7 @@ public class OtherBubbleBehaviour : MonoBehaviour, ISinkable
         yield return new WaitForSeconds(timeToDestroy);
         isTouchedPlayer = false;
         Destroy(this.GetComponent<Rigidbody>());
+        Destroy(this.GetComponent<PlayerWeapon>());
 
     }
 
