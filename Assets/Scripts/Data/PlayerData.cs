@@ -29,7 +29,7 @@ public class PlayerData : Singleton<PlayerData>
         }
         if (score < 0)
         {
-            SceneManager.LoadScene("Intro");
+            SceneManager.LoadScene("Lose");
         }
 
         EventTable.onPlayerScoreChange?.Invoke(score);
