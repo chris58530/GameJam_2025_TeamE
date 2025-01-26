@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerBubbleBehaviour : MonoBehaviour
@@ -13,10 +14,12 @@ public class PlayerBubbleBehaviour : MonoBehaviour
     void OnEnable()
     {
         EventTable.onDestroyOtherBubble += KillBubble;
+        EventTable.onPlayerWin += Win;
     }
     void OnDisable()
     {
         EventTable.onDestroyOtherBubble -= KillBubble;
+        EventTable.onPlayerWin -= Win;
     }
     void Update()
     {
@@ -63,12 +66,30 @@ public class PlayerBubbleBehaviour : MonoBehaviour
     }
     public void OnCollisionWeapon()
     {
-        
+
         PlayerData.Instance.AddScore(-1);
         this.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
         CameraManager.Instance.ShakeCamera();
     }
-
+    void Win()
+    {
+        StartCoroutine(WinAndFly());
+    }
+    IEnumerator WinAndFly()
+    {
+        StartCoroutine(loadScene());
+        while (transform.position.y < 100)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 100, transform.position.z), 0.25f);
+            yield return new WaitForSeconds(0.01f);
+        }
+        yield return null;
+    }
+    IEnumerator loadScene()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("gamewon");
+    }
 
     private void OnCollisionEnter(Collision other)
     {
