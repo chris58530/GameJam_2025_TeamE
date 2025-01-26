@@ -724,7 +724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3988093122556161313, guid: 4df4c94b8d49d9447acf7b65be14bbec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.08
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 3988093122556161313, guid: 4df4c94b8d49d9447acf7b65be14bbec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -738,7 +738,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BathController
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8534797662087712467, guid: 4df4c94b8d49d9447acf7b65be14bbec, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534797662087712467, guid: 4df4c94b8d49d9447acf7b65be14bbec, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8534797662087712467, guid: 4df4c94b8d49d9447acf7b65be14bbec, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

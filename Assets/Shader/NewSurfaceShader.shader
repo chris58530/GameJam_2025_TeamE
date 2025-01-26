@@ -3,7 +3,7 @@ Shader "Custom/BubbleShader"
     Properties
     {
         _MainColor ("Bubble Color", Color) = (1, 1, 1, 1)
-        _FresnelPower ("Fresnel Power", Range(1, 10)) = 5
+        _FresnelPower ("Fresnel Power", Range(0, 10)) = 5
         _ReflectionColor ("Reflection Color", Color) = (1, 1, 1, 1)
         _Distortion ("Distortion Amount", Range(0, 1)) = 0.1
         _NoiseScale ("Noise Scale", Range(1, 10)) = 3
