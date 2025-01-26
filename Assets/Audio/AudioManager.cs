@@ -25,9 +25,16 @@ public class AudioManager : MonoBehaviour
     public AudioClip Fallingclip;
     public AudioClip BubbleFallclip;
 
-    AudioSource bgmSource;
-    AudioSource esSource;
-    AudioSource playerSource;
+  [Header("AudioMixer 設定")]
+    public AudioMixer audioMixer; // 引用 AudioMixer 資源
+    public string bgmMixerGroupName = "BGM";        // BGM 的 Mixer Group 名稱
+    public string esMixerGroupName = "SFX";        // 事件音效的 Mixer Group 名稱
+    public string playerMixerGroupName = "Player"; // 玩家動作音效的 Mixer Group 名稱
+
+
+    public AudioSource bgmSource;
+    public AudioSource esSource;
+    public AudioSource playerSource;
 
     private void Awake()
     {
@@ -39,8 +46,31 @@ public class AudioManager : MonoBehaviour
         esSource = gameObject.AddComponent<AudioSource>();
         playerSource = gameObject.AddComponent<AudioSource>();
 
-
+        AssignMixerGroup(bgmSource, bgmMixerGroupName);
+        AssignMixerGroup(esSource, esMixerGroupName);
+        AssignMixerGroup(playerSource, playerMixerGroupName);
     }
+
+    private void AssignMixerGroup(AudioSource source, string mixerGroupName)
+    {
+        if (audioMixer == null)
+        {
+            Debug.LogError("AudioMixer 尚未指定！");
+            return;
+        }
+
+        AudioMixerGroup[] mixerGroups = audioMixer.FindMatchingGroups(mixerGroupName);
+        if (mixerGroups.Length > 0)
+        {
+            source.outputAudioMixerGroup = mixerGroups[0];
+            Debug.Log($"成功將 {source.gameObject.name} 的輸出設置為 {mixerGroupName} Group");
+        }
+        else
+        {
+            Debug.LogError($"未找到名為 {mixerGroupName} 的 Mixer Group！");
+        }
+    }
+
 
     // Music聲音觸發
     public void PlayStartMusicAudio()

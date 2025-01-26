@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartMusic: {fileID: 8300000, guid: f7dcb5be700714cf4b0367aad8344886, type: 3}
+  BattleMusic: {fileID: 0}
   IntroMusic: {fileID: 8300000, guid: 8384e8611ac3d4618aa99fe7b45ab171, type: 3}
   bgm: {fileID: 8300000, guid: 01acab6926fd44523ac9fbdb94667a9f, type: 3}
-  fightbgm: {fileID: 8300000, guid: 3532b74ad6317404e974689df816c47c, type: 3}
   WalkStepclips:
   - {fileID: 8300000, guid: b99c9bb405633439a840c720446fbdda, type: 3}
   - {fileID: 8300000, guid: 353b64feab9ba4d64a91323c627210a4, type: 3}
@@ -57,3 +57,10 @@ MonoBehaviour:
   ObjectFallclip: {fileID: 8300000, guid: a55112880c65a4bee9bfb0052179c250, type: 3}
   Fallingclip: {fileID: 8300000, guid: 4ee3aa585cd7a49659763610884e74cd, type: 3}
   BubbleFallclip: {fileID: 8300000, guid: 0aeb031c707ea40a6a49af39e16a2ac3, type: 3}
+  bgmSource: {fileID: 0}
+  esSource: {fileID: 0}
+  playerSource: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: e32c1f49e8c654fd7a27860a54976345, type: 2}
+  bgmMixerGroupName: BGM
+  esMixerGroupName: SFX
+  playerMixerGroupName: Player
