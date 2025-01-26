@@ -7,7 +7,7 @@ public enum DuckAttackState
     Idle,
     Rush,
     HyperBeam,
-    SinkAttack, 
+    SinkAttack,
     GoMiddle,
 
 }
@@ -80,7 +80,8 @@ public class DuckBehaviour : MonoBehaviour
                 // StartCoroutine(SinkAttack());
                 break;
             case DuckAttackState.GoMiddle:
-               GoMiddle();
+                StopAllCoroutines();
+                GoMiddle();
                 break;
         }
     }
@@ -88,7 +89,7 @@ public class DuckBehaviour : MonoBehaviour
     {
         transform.position = Vector3.zero;
         SwithState(DuckAttackState.HyperBeam);
-        
+
 
     }
     IEnumerator Idle()

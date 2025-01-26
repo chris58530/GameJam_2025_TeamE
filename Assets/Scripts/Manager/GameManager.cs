@@ -10,7 +10,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject menuUI;
 
     [SerializeField] GameEvent gameEvent;
-
+    [SerializeField] private Animator startAnimation;
     public enum GameState
     {
         Menu,
@@ -26,6 +26,22 @@ public class GameManager : Singleton<GameManager>
     {
         SetGameState((GameState)System.Enum.Parse(typeof(GameState), stateName));
     }
+    IEnumerator WaitAndSetGameState(GameState state)
+    {
+        startAnimation.Play("MagicVideo");
+        yield return new WaitForSeconds(1f);
+        AudioManager.current.StopstartMusicAudio();
+        AudioManager.current.PlaybgmAudio();
+
+        sceneLoader.LoadSceneAdditive("BaseSettingScene");
+        sceneLoader.LoadSceneAdditive("UI");
+        sceneLoader.LoadSceneAdditive("BathScene");
+        menuUI.SetActive(false);
+        gameEvent.StartGameEvent();
+        PlayerData.Instance.Init();
+
+        FindObjectOfType<DuckSummon>().Summon();
+    }
     public void SetGameState(GameState state)
     {
         CameraManager.Instance.SwitchCamera(state);
@@ -33,6 +49,7 @@ public class GameManager : Singleton<GameManager>
         switch (state)
         {
             case GameState.Menu:
+
                 sceneLoader.UnloadScene("BaseSettingScene");
                 sceneLoader.UnloadScene("UI");
                 menuUI.SetActive(true);
@@ -40,15 +57,9 @@ public class GameManager : Singleton<GameManager>
 
                 break;
             case GameState.Start:
-                AudioManager.current.StopstartMusicAudio();
-                AudioManager.current.PlaybgmAudio();
+                StartCoroutine(WaitAndSetGameState(state));
 
-                sceneLoader.LoadSceneAdditive("BaseSettingScene");
-                sceneLoader.LoadSceneAdditive("UI");
-                sceneLoader.LoadSceneAdditive("BathScene");
-                menuUI.SetActive(false);
-                gameEvent.StartGameEvent();
-                PlayerData.Instance.Init();
+
                 break;
 
             case GameState.GameOver:

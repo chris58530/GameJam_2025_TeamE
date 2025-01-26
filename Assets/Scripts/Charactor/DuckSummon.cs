@@ -6,7 +6,7 @@ public class DuckSummon : MonoBehaviour
 {
     [SerializeField] private GameObject duckPrefab;
     [SerializeField] private float summonTime = 5f;
-    void Start()
+    public void Summon()
     {
         StartCoroutine(SummonDuck());
     }
