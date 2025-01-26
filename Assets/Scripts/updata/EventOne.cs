@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class EventOne : MonoBehaviour
 {
-    [SerializeField] private GameObject brushPrefab; // 生成的泡泡預置物件
+    [SerializeField] private GameObject brushPrefab; // 生成的刷子預置物件
     [SerializeField] private Transform minSpawnPosition; // 最小生成位置
     [SerializeField] private Transform maxSpawnPosition; // 最大生成位置
 
