@@ -1102,7 +1102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duckPrefab: {fileID: 2929304951713702764, guid: 135f18e99a42d4a359fd71b82edc2935, type: 3}
-  summonTime: 10
+  summonTime: 3
 --- !u!1 &1396281847
 GameObject:
   m_ObjectHideFlags: 0

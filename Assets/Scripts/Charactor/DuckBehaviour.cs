@@ -7,7 +7,7 @@ public enum DuckAttackState
     Idle,
     Rush,
     HyperBeam,
-    SinkAttack,
+    SinkAttack, GoMiddle,
 
 }
 
@@ -15,15 +15,16 @@ public class DuckBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private float speed = 2.0f;
-
+    [SerializeField] private GameObject duckModel;
     [SerializeField] public GameObject preHyperBeam;
     [SerializeField] private GameObject hyperBeam;
 
     DuckAttackState currentState = DuckAttackState.Idle;
 
-   public Transform player;
+    public Transform player;
     bool attacking = false;
-    void Start(){
+    void Start()
+    {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         AudioManager.current.PlayBattleBGM();
     }
@@ -32,7 +33,7 @@ public class DuckBehaviour : MonoBehaviour
     // Update is called once er frame
     void Update()
     {
-          if (transform.position.y > 0)
+        if (transform.position.y > 0)
         {
             StartCoroutine(MoveToZero());
         }
@@ -40,7 +41,7 @@ public class DuckBehaviour : MonoBehaviour
         AttackState(currentState);
 
     }
-     private IEnumerator MoveToZero()
+    private IEnumerator MoveToZero()
     {
         while (transform.position.y > 1)
         {
@@ -72,18 +73,29 @@ public class DuckBehaviour : MonoBehaviour
                 StartCoroutine(HyperBeam());
                 Debug.Log("HyperBeam");
                 break;
-                case DuckAttackState.SinkAttack:
-                    Debug.Log("SinkAttack");
-                StartCoroutine(HyperBeam());
-                    // StartCoroutine(SinkAttack());
-                    break;
+            case DuckAttackState.SinkAttack:
+                Debug.Log("SinkAttack");
+                StartCoroutine(Rush());
+                // StartCoroutine(SinkAttack());
+                break;
+            case DuckAttackState.GoMiddle:
+                StartCoroutine(GoMiddle());
+                break;
+        }
+    }
+    IEnumerator GoMiddle()
+    {
+        while (transform.position.z > 0 || transform.position.x > 0)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 1, 0), 0.25f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
     IEnumerator Idle()
     {
         attacking = true;
         yield return new WaitForSeconds(.5f);
-        
+
         int random = Random.Range(0, DuckAttackState.GetValues(typeof(DuckAttackState)).Length);
         Debug.Log(random);
         SwithState((DuckAttackState)random);
@@ -195,6 +207,13 @@ public class DuckBehaviour : MonoBehaviour
 
     public void GetHurt()
     {
-       DuckData.Instance.SetHp(10);
+        DuckData.Instance.SetHp(10);
+        StartCoroutine(FlashRed());
+    }
+    IEnumerator FlashRed()
+    {
+        duckModel.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        duckModel.GetComponent<Renderer>().material.color = Color.white;
     }
 }

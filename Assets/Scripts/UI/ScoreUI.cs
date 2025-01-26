@@ -10,6 +10,7 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
 
     [SerializeField]private Image duckHealthImage;
+    [SerializeField]private Animator duckHealthAnimator;
     void OnEnable()
     {
         EventTable.onPlayerScoreChange += UpdateScore;
@@ -28,5 +29,9 @@ public class ScoreUI : MonoBehaviour
     {
 
         scoreText.text = score.ToString();
+    }
+    public void PlayDuckHealthAnimation()
+    {
+        duckHealthAnimator.Play("DuckHpBarIntro");
     }
 }

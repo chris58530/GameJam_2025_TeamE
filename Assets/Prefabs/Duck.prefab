@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  duckModel: {fileID: 4166887516696988382}
   preHyperBeam: {fileID: 2851845859237249484}
   hyperBeam: {fileID: 962141546998002635}
   player: {fileID: 0}

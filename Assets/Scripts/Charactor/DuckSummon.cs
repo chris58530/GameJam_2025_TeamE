@@ -5,7 +5,7 @@ using UnityEngine;
 public class DuckSummon : MonoBehaviour
 {
     [SerializeField] private GameObject duckPrefab;
-[SerializeField]private float summonTime = 5f;
+    [SerializeField] private float summonTime = 5f;
     void Start()
     {
         StartCoroutine(SummonDuck());
@@ -14,6 +14,15 @@ public class DuckSummon : MonoBehaviour
     {
 
         yield return new WaitForSeconds(summonTime);
-        Instantiate(duckPrefab, transform.position+ Vector3.up * 10, Quaternion.identity);
+        GameObject hpBG = GameObject.Find("HpBG");
+        if (hpBG != null)
+        {
+            Animator animator = hpBG.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.Play("DuckHpBarIntro");
+            }
+        }
+        Instantiate(duckPrefab, transform.position + Vector3.up * 10, Quaternion.identity);
     }
 }
