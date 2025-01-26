@@ -6,33 +6,42 @@ using UnityEngine.SceneManagement;
 
 public class PlayerData : Singleton<PlayerData>
 {
-   public int score;
-   public float moveSpeed;
-   public void Init()
-   {
-       score = 0;
-       EventTable.onPlayerScoreChange?.Invoke(score);
+    public int score;
+    public float moveSpeed;
+    bool isWon = false;
+    public void Init()
+    {
+        score = 0;
+        EventTable.onPlayerScoreChange?.Invoke(score);
 
-       SetMoveSpeed((int)PlayerState.NormalSpeed);
-   }
-   public void AddScore(int value)
-   {
+        SetMoveSpeed((int)PlayerState.NormalSpeed);
+    }
+    public void AddScore(int value)
+    {
+        if (isWon) return;
+        score += value;
 
-       score += value;
-       if (score < 0)
-       {
-           SceneManager.LoadScene("Intro");
-       }
-       EventTable.onPlayerScoreChange?.Invoke(score);
-   }
-   public void SetMoveSpeed(float value)
-   {
-       moveSpeed = value;
-   }
-   public enum PlayerState
-   {
-      NormalSpeed = 5,
-      TouchedBubbleSpeed = 2
-   }
+        if (score >= 3)
+        {
+            EventTable.onPlayerWin?.Invoke();
+            isWon = true;
+            return;
+        }
+        if (score < 0)
+        {
+            SceneManager.LoadScene("Intro");
+        }
+
+        EventTable.onPlayerScoreChange?.Invoke(score);
+    }
+    public void SetMoveSpeed(float value)
+    {
+        moveSpeed = value;
+    }
+    public enum PlayerState
+    {
+        NormalSpeed = 5,
+        TouchedBubbleSpeed = 2
+    }
 
 }

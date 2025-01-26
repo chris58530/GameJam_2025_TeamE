@@ -2,6 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class EventTable
 {
@@ -11,4 +12,5 @@ public static class EventTable
 
     public static Action<int> onPlayerScoreChange;
     public static Action<int> onDuckHealthChange;
+    public static Action onPlayerWin;
 }
