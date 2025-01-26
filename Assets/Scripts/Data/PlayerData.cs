@@ -21,7 +21,7 @@ public class PlayerData : Singleton<PlayerData>
         if (isWon) return;
         score += value;
 
-        if (score >= 3)
+        if (score >= 10)
         {
             EventTable.onPlayerWin?.Invoke();
             isWon = true;

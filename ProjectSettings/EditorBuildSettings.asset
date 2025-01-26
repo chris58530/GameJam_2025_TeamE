@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/gamewon.unity
     guid: c0c6e700ca3e0457cbbd00248c9a5b2f
+  - enabled: 1
+    path: Assets/Scenes/Lose.unity
+    guid: 561ba3d4d126f4bcda2d204512c30ffb
   m_configObjects: {}
