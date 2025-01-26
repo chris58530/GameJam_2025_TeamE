@@ -39,7 +39,6 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         current = this;
-        DontDestroyOnLoad(gameObject);
 
 
         bgmSource = gameObject.AddComponent<AudioSource>();
